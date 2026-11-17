@@ -355,6 +355,7 @@ typedef struct iv_state_s {
     char *locale;
     int audio_app_type; // 0 - nothing, 1 - audio player, 2 - audio book, 3 - browser, 4 - reader player
     int capability;
+    int awaiting_update;
 } iv_state;
 
 typedef struct iv_uiqrecord_s {
