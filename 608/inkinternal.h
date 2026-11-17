@@ -4,13 +4,11 @@
 #include "inkplatform.h"
 #include "inkview.h"
 
-#if 0
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
 #include FT_IMAGE_H
 #include FT_OUTLINE_H
-#endif
 
 #ifndef EMULATOR
 #include <dlfcn.h>
