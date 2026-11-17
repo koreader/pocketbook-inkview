@@ -1,29 +1,27 @@
-#ifndef INKVIEW_H
-#define INKVIEW_H
+#pragma once
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <string.h>
-#include <ctype.h>
-#include <unistd.h>
-#include <time.h>
-#include <sys/time.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
 #include <dirent.h>
 #include <fcntl.h>
 #include <grp.h>
-#include <sys/ipc.h>
-#include <sys/shm.h>
-#include <sys/msg.h>
-#include <sys/sysinfo.h>
-#include <signal.h>
-#include <errno.h>
-#include <zlib.h>
 #include <pthread.h>
+#include <stdarg.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <sys/shm.h>
+#include <sys/stat.h>
+#include <sys/sysinfo.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <time.h>
+#include <unistd.h>
+#include <zlib.h>
+
+// clang-format off
 
 #ifdef __cplusplus
 #define INKVIEW_DEPRECATED(MSG) [[deprecated(MSG)]]
@@ -2058,6 +2056,7 @@ enum updflags {
     UPD_WAIT_AFTER  = (1 << 21),  // wait for update complete after this update
     UPD_DITHER      = (1 << 22),  // apply dithering
     UPD_NOIMPROVE   = (1 << 23),  // do not improve lines color
+    UPD_HANDWRITE   = (1 << 24),  // handwriting update
 };
 
 void ClearScreen();
@@ -2275,10 +2274,15 @@ ibitmap* CopyBitmapDepth24To8(const ibitmap* bmp);
 
 void MoveBitmap(ibitmap* bmp, int offset);
 void MoveBitmapRight(ibitmap* bm, int offset);
-// Only one side per call.
-// percent of image width or height
-// side -1 - all page
-int FindAverageBitmapColor(const ibitmap *bmp, /*enum eside*/int side, int percent);
+
+/**
+ * @brief FindAverageBitmapColor
+ * @param bmp
+ * @param side - pass -1 for all page
+ * @param percent - percent of image width or height
+ * @return rgb (r mask: 0x00ff0000, g mask: 0x0000ff00, r mask: 0x000000ff) in native endian (byte at 0xff000000 is undefined)
+ */
+uint32_t FindAverageBitmapColor(const ibitmap *bmp, /*enum eside*/int side, int percent);
 
 void ApplyContrastToBitmap8(ibitmap* bmp, int contrast);
 /**
@@ -2402,6 +2406,7 @@ void PartialUpdateBlack(int x, int y, int w, int h);
 void PartialUpdateBW(int x, int y, int w, int h);
 void PartialUpdateHQ(int x, int y, int w, int h);
 void PartialUpdateDU4(int x, int y, int w, int h);
+void PartialUpdateHandwrite(int x, int y, int w, int h);
 void PartialUpdateTextPage(int x, int y, int w, int h);
 void DynamicUpdate(int x, int y, int w, int h);
 void DynamicUpdateWithoutImprovingLinesColor(int x, int y, int w, int h);
@@ -2509,6 +2514,7 @@ void KeyboardNotifyTextChanges(const char* text_before, const char* text_after);
 void setKeyboardTextChangeCallback(keyboard_text_change_callback cb, void * context);
 void DrawKeyboard();
 void OpenCustomKeyboard(const char *filename, const char *title, char *buffer, int maxlen, int flags, iv_keyboardhandler hproc);
+void OpenCustomKeyboardEx(const char* filename, const char* title, char* buffer, int maxlen, int flags, iv_keyboardhandlerex hproc, void* cb_data);
 void CloseKeyboard();
 void GetKeyboardRect(irect *rect);
 irect GetKeyboardRectWithParams(const char *title, char *buffer, int flags);
@@ -4476,4 +4482,4 @@ bool is_accessibility_enabled();
 
 #endif
 
-#endif
+// clang-format on

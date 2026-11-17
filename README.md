@@ -15,7 +15,7 @@ Origin of each version:
 - 6.5:  from https://github.com/pocketbook-free/SDK_481/tree/6.5
 - 6.8:  from https://github.com/pocketbook/SDK_6.3.0/releases/tag/6.8
 - 6.10: from https://github.com/Sean-on-Git/PocketBook-SDK/releases/tag/6.10
-- 6.11: from https://github.com/Sean-on-Git/PocketBook-SDK/releases/tag/6.11
+- 6.11: from https://download.pocketbook-int.com/TestFW/SDK/SDK-RK-6.11.tar.gz (official PocketBook server)
 
 NOTE:
 - all `libinkview.so` files have been stripped

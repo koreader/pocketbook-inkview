@@ -63,6 +63,9 @@ typedef enum {
 	DEVICE_1040dl = 46,
 	DEVICE_700k3p = 47,
 	DEVICE_1030 = 48,
+	DEVICE_710 = 49,
+	DEVICE_5084 = 50,
+	DEVICE_635 = 51,
 } device_id_t;
 
 // ================ display and epd controller ==============
@@ -82,6 +85,7 @@ typedef enum {
 	DISPLAY_9INCH_1200_825, //display 1200x825 9.7"
 	DISPLAY_7INCH_1264_1680,
 	DISPLAY_8INCH_1920_1440, //display 1920x1440 ACEP
+    DISPLAY_5INCH_1576_788,
 } display_id_t;
 
 typedef enum {
@@ -112,6 +116,7 @@ typedef enum {
 	UPDATE_MODE_FULL      = 1,
 	UPDATE_MODE_PARTIALHQ = 2,
 	UPDATE_MODE_FULLHQ    = 3,
+    UPDATE_MODE_HANDWRITE = 4,
 } update_mode_t;
 
 //======= input devices ============
@@ -148,6 +153,8 @@ typedef enum {
 	KEYBOARD_POCKET629,
 	KEYBOARD_POCKET619,
 	KEYBOARD_POCKET1030,
+	KEYBOARD_POCKET5084,
+	KEYBOARD_POCKET635,
 } keyboard_id_t;
 
 typedef enum {
@@ -490,6 +497,14 @@ bool device_is_charging(void);
 bool device_is_battery_full(void);
 int device_battery_voltage(void);
 int device_battery_capacity(void);
+/*!
+ * \brief device_battery_current
+ * \details implemented only for PLATFORM_B300
+ * \return PLATFORM_B300: current < 0 - battery is discharging in μA
+ * \return PLATFORM_B300: current > 0 - battery is charging in μA
+ * \return Other platforam: 0
+ */
+int device_battery_current(void);
 
 bool device_set_bootcramfs_flag(bool flag);
 void device_reboot(void);
