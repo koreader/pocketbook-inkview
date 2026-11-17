@@ -1,4 +1,4 @@
-Minimal collection of PocketBook's InkView library and headers for use by KOReader.
+Minimal collection of PocketBook's InkView libraries and headers for use by KOReader.
 
 Origin of each version:
 - 5.2:  from https://github.com/pocketbook-free/SDK_481/tree/5.2
@@ -13,10 +13,6 @@ Origin of each version:
 - 5.17: from https://github.com/pocketbook-free/SDK_481/tree/5.17
 - 5.19: from https://github.com/pocketbook-free/SDK_481/tree/5.19
 - 6.5:  from https://github.com/pocketbook-free/SDK_481/tree/6.5
-- 6.8:  from https://github.com/pocketbook/SDK_6.3.0/releases/tag/6.8
-- 6.10: from https://github.com/Sean-on-Git/PocketBook-SDK/releases/tag/6.10
-- 6.11: from https://github.com/Sean-on-Git/PocketBook-SDK/releases/tag/6.11
+- 6.7, 6.8, 6.10, 6.11 & 6.12: from the corresponding official PocketBook' SDK (see `update.sh`)
 
-NOTE:
-- all `libinkview.so` files have been stripped
-- some headers includes (e.g. `ft2build.h`, `zlib.h`) have been commented out
+NOTE: all `libinkview.so` files are stubs (created from each corresponding version, see `stub.sh`).
